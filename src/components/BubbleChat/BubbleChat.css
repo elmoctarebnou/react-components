@@ -1,0 +1,78 @@
+.typing-indicator {
+  background-color: #e6e7ed;
+  will-change: transform;
+  width: 5em; 
+  border-radius: 30em; 
+  padding: 1em;
+  display: flex;
+  flex-direction: row;
+  align-items: space-between;
+  margin: 0.5em auto 0.5em 1em;
+  position: relative;
+  animation: 2s bulge infinite ease-out;
+}
+.typing-indicator::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: -3px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #e6e7ed;
+}
+.typing-indicator::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: -2px;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #e6e7ed;
+}
+.typing-indicator::after {
+  height: 10px;
+  width: 10px;
+  left: -10px;
+  bottom: -10px;
+}
+.typing-indicator .circleOne {
+  height: 1em;
+  width: 1em;
+  margin: 0 .3em;
+  background-color: #9e9ea1;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: 1s blink infinite 0.3s;
+}
+.typing-indicator .circleTwo {
+  height: 1em;
+  width: 1em;
+  margin: 0 .3em;
+  background-color: #9e9ea1;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: 1s blink infinite 0.6s;
+}
+.typing-indicator .circleThree {
+  height: 1em;
+  width: 1em;
+  margin: 0 .3em;
+  background-color: #9e9ea1;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: 1s blink infinite .9s;
+}
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes bulge {
+  50% {
+    transform: scale(1.05);
+  }
+}
+
