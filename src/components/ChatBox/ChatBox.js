@@ -187,7 +187,9 @@ const ChatBox = (props) => {
                         <Paper className={classes.main}>
                             {renderFilterBar()}
                             {renderMessagesView()}
-                            {<BubbleChat message="Moctar is typing"/>}
+                            <div style={{margin: ".5em auto .5em .5em"}}>
+                                {<BubbleChat message="Moctar is typing"/>}
+                            </div>
                             {renderMessageBox()}
                         </Paper>
                     )
