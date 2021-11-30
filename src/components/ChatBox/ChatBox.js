@@ -5,16 +5,19 @@ import {
     Button,
     Paper,
     TextareaAutosize,
-    TextField, 
+    TextField,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
 import PersonIcon from '@mui/icons-material/Person';
 import ForumIcon from '@mui/icons-material/Forum';
 
 import BubbleChat from "../BubbleChat/BubbleChat";
+import DraftTextInput from "../DraftTextInput/DraftTextInput";
+
 import * as SERVICE from "./ChatBoxService";
 
 import { styles } from "./ChatBox.style";
+import "draft-js/dist/Draft.css";
 
 const messageList = [
     {
@@ -33,6 +36,42 @@ const messageList = [
         "created_by": "Jonathan",
     }
 ]
+const mentions = [
+    {
+        name: "Matthew Russell",
+        link: "https://twitter.com/mrussell247",
+        avatar:
+            "https://pbs.twimg.com/profile_images/517863945/mattsailing_400x400.jpg",
+        userId: 13
+    },
+    {
+        name: "Julian Krispel-Samsel",
+        link: "https://twitter.com/juliandoesstuff",
+        avatar: "https://avatars2.githubusercontent.com/u/1188186?v=3&s=400"
+    },
+    {
+        name: "Jyoti Puri",
+        link: "https://twitter.com/jyopur",
+        avatar: "https://avatars0.githubusercontent.com/u/2182307?v=3&s=400"
+    },
+    {
+        name: "Max Stoiber",
+        link: "https://twitter.com/mxstbr",
+        avatar:
+            "https://pbs.twimg.com/profile_images/763033229993574400/6frGyDyA_400x400.jpg"
+    },
+    {
+        name: "Nik Graf",
+        link: "https://twitter.com/nikgraf",
+        avatar: "https://avatars0.githubusercontent.com/u/223045?v=3&s=400"
+    },
+    {
+        name: "Pascal Brandt",
+        link: "https://twitter.com/psbrandt",
+        avatar:
+            "https://pbs.twimg.com/profile_images/688487813025640448/E6O6I011_400x400.png"
+    }
+];
 
 const ChatBox = (props) => {
 
@@ -50,17 +89,17 @@ const ChatBox = (props) => {
     const classes = makeStyles(styles())();
 
     useEffect(() => {
-        if(messageList){
+        if (messageList) {
             setMsgList(messageList);
         }
     }, [messages]);
 
     useEffect(() => {
-        if(filterMessage.length > 0 && displayMsg){
+        if (filterMessage.length > 0 && displayMsg) {
             setDisplayMsg((prevState) => {
-                let searchData = prevState.length > 0 
-                    ?   prevState 
-                    :   JSON.parse(JSON.stringify(msgList))
+                let searchData = prevState.length > 0
+                    ? prevState
+                    : JSON.parse(JSON.stringify(msgList))
                 let newState = SERVICE.filterMessagesByText(searchData, filterMessage);
                 return newState
             })
@@ -71,7 +110,7 @@ const ChatBox = (props) => {
 
     const submitMessage = () => {
         let newMsg = {
-            "created_by": "Moctar", 
+            "created_by": "Moctar",
             "content": message,
             "tagged_users": taggedUsers
         }
@@ -87,8 +126,8 @@ const ChatBox = (props) => {
 
     const handleChange = e => {
         const { name, value } = e.currentTarget;
-        if(name === "new-message") setMessage(value);
-        if(name === "filter-text") {
+        if (name === "new-message") setMessage(value);
+        if (name === "filter-text") {
             setFilterMessage(value);
             setIsFiltering(value.length > 0 ? true : false);
         }
@@ -96,8 +135,8 @@ const ChatBox = (props) => {
 
     const handleClick = e => {
         const { name, value } = e.currentTarget;
-        if(name === "send-msg") submitMessage();
-        if(name === "toggle-msg-window") {
+        if (name === "send-msg") submitMessage();
+        if (name === "toggle-msg-window") {
             setToggleMsgsWindow(!toggleMsgsWindow);
         }
     }
@@ -120,9 +159,9 @@ const ChatBox = (props) => {
     const renderMessageRow = (msg, i) => {
         return (
             <div key={i} className={classes.msgRow}>
-                <PersonIcon className={classes.personIcon}/>
+                <PersonIcon className={classes.personIcon} />
                 <div className={classes.msgInfo}>
-                    <div className={classes.row} style={{margin: "0 0 .3em 0"}}>
+                    <div className={classes.row} style={{ margin: "0 0 .3em 0" }}>
                         <span className={classes.userName}>
                             <b>{msg["created_by"]}</b>
                         </span>
@@ -131,8 +170,8 @@ const ChatBox = (props) => {
                         </span>
                     </div>
                     {msg["content"].split(`\n`).map((p, i) => {
-                        return(
-                            <p key={i} style={{margin: 0}}>
+                        return (
+                            <p key={i} style={{ margin: 0 }}>
                                 {p}
                             </p>
                         )
@@ -164,9 +203,9 @@ const ChatBox = (props) => {
                     onChange={handleChange}
                 />
                 <div className={classes.msgBoxUtilsRow}>
-                    <span 
+                    <span
                         name="send-msg"
-                        className={message.length === 0 
+                        className={message.length === 0
                             ? classes.sendBtnDisable
                             : classes.sendBtn
                         }
@@ -181,19 +220,20 @@ const ChatBox = (props) => {
     }
 
     const renderMsgWindow = () => {
-        if(toggleMsgsWindow === true){
-                if(displayMsg){
-                    return (
-                        <Paper className={classes.main}>
-                            {renderFilterBar()}
-                            {renderMessagesView()}
-                            <div style={{margin: ".5em auto .5em .5em"}}>
-                                {<BubbleChat message="Moctar is typing"/>}
-                            </div>
-                            {renderMessageBox()}
-                        </Paper>
-                    )
-                }
+        if (toggleMsgsWindow === true) {
+            if (displayMsg) {
+                return (
+                    <Paper className={classes.main}>
+                        {renderFilterBar()}
+                        {renderMessagesView()}
+                        <div style={{ margin: ".5em auto .5em 1em" }}>
+                            {<BubbleChat message="Moctar is typing" />}
+                        </div>
+                        {/* {renderMessageBox()} */}
+                        <DraftTextInput/>
+                    </Paper>
+                )
+            }
         }
     }
 
@@ -202,7 +242,7 @@ const ChatBox = (props) => {
             <Button
                 variant="contained"
                 name="toggle-msg-window"
-                endIcon={<ForumIcon/>}
+                endIcon={<ForumIcon />}
                 onClick={handleClick}
                 className={classes.toggleBtn}
             >
