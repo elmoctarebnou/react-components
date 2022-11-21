@@ -1,0 +1,32 @@
+import React, { useState, useEffect, useRef } from "react";
+
+import makeStyles from "@mui/styles/makeStyles";
+import {
+    Paper,
+} from '@mui/material';
+import GridLayout from "react-grid-layout";
+import "react-grid-layout/css/styles.css";
+import "react-resizable/css/styles.css";
+
+const Dashboard = (props) => {
+
+    const layout = [
+        { i: "a", x: 0, y: 0, w: 20, h: 2},
+        { i: "b", x: 2, y: 0, w: 20, h: 2},
+        { i: "c", x: 4, y: 0, w: 20, h: 2 }
+    ];
+    return (
+            <GridLayout
+                className="layout"
+                layout={layout}
+                cols={12}
+                rowHeight={30}
+            >
+                <div key="a" style={{backgroundColor: 'red'}}>a</div>
+                <div key="b" style={{backgroundColor: 'blue'}}>b</div>
+                <div key="c" style={{backgroundColor: 'green'}}>c</div>
+            </GridLayout>
+    )
+}
+
+export default Dashboard;

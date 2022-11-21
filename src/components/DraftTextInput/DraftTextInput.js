@@ -45,7 +45,7 @@ export default function DraftTextInput(props) {
     }, []);
 
     return (
-        <Paper className={classes.main}  onClick={() => ref.current.focus()}>
+        <Paper className={classes.main}  onClick={()=>ref.current.focus()}>
             <Editor
                 editorKey={'editor'}
                 editorState={editorState}

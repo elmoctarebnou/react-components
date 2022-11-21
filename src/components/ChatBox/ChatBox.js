@@ -26,16 +26,17 @@ const messageList = [
         "created_by": "Jonathan",
     },
     {
-        "content": "Talk to Doug",
+        "content": "Talk to Doug.",
         "date": "2021-10-29T15:53:11.542368Z",
         "created_by": "Dylan",
     },
     {
-        "content": "Craig and Debbie Waldron are moderately conservative to balanced in their investment tolerance. They are pulling some income from their portfolio and will plan on passing on the rest to their heirs. With their current health and time horizon they are looking at no major financial obligations in the short-term. They are willing to accept the minor volatility of a balanced allocation. SB1000\n\nPLEASE DO NOT APPROVE UNTIL I'VE CONFIRMED WITH TEAM",
+        "content": "Craig and Debbie Waldron are moderately conservative to balanced in their investment tolerance. They are pulling some income from their portfolio and will plan on passing on the rest to their heirs. With their current health and time horizon they are looking at no major financial obligations in the short-term. They are willing to accept the minor volatility of a balanced allocation. SB1000\n\nPLEASE DO NOT APPROVE UNTIL I'VE CONFIRMED WITH TEAM.",
         "date": "2021-10-29T17:59:04.225183Z",
         "created_by": "Jonathan",
     }
-]
+];
+
 const mentions = [
     {
         name: "Matthew Russell",
